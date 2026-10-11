@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "trajectories": 16,
+  "groups": 4,
+  "seed": 7,
+  "errors": 0,
+  "warnings": 2,
+  "findings": [
+    {
+      "severity": "warning",
+      "code": "zero_variance_group",
+      "item": "fixture-v1/group-1",
+      "detail": "Relative reward signal is zero; KL/entropy terms may still update."
+    },
+    {
+      "severity": "warning",
+      "code": "zero_variance_group",
+      "item": "fixture-v1/group-2",
+      "detail": "Relative reward signal is zero; KL/entropy terms may still update."
+    }
+  ],
+  "group_statistics": [
+    {
+      "group": "fixture-v1/group-0",
+      "n": 4,
+      "mean_reward": 0.5,
+      "flat": false,
+      "advantages": [
+        -0.9999999800000003,
+        0.9999999800000003,
+        -0.9999999800000003,
+        0.9999999800000003
+      ]
+    },
+    {
+      "group": "fixture-v1/group-1",
+      "n": 4,
+      "mean_reward": 1.0,
+      "flat": true,
+      "advantages": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "group": "fixture-v1/group-2",
+      "n": 4,
+      "mean_reward": 0.0,
+      "flat": true,
+      "advantages": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "group": "fixture-v1/group-3",
+      "n": 4,
+      "mean_reward": 0.25,
+      "flat": false,
+      "advantages": [
+        -0.5773502558562927,
+        -0.5773502558562927,
+        1.7320507675688783,
+        -0.5773502558562927
+      ]
+    }
+  ],
+  "evaluations": [
+    {
+      "run_id": "fixture-v1",
+      "policy_version": "synthetic-policy",
+      "split": "train",
+      "source": "synthetic",
+      "tasks": 4,
+      "trials": 16,
+      "k": 1,
+      "pass_at_k": 0.4375,
+      "task_bootstrap_95": [
+        0.125,
+        0.8125
+      ],
+      "insufficient_tasks": [],
+      "duplicate_ids": false
+    }
+  ],
+  "caveats": [
+    "Synthetic fixtures are not evidence of LLM capability.",
+    "pass@k assumes exchangeable trials; source IDs cannot prove independence or prevent semantic data leakage.",
+    "Bootstrap resamples tasks; no training-seed or repeated-query uncertainty is estimated.",
+    "Metrics describe input even when other audit errors exist; resolve errors before reporting results."
+  ],
+  "input_sha256": "3acfd66a1b60634b70cb16dba594d242243e7988bd53c452b59b4aa3693c0d3e",
+  "tool_version": "0.1.0"
+}

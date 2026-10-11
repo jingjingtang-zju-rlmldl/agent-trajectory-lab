@@ -1,0 +1,101 @@
+{
+  "source": "synthetic-numerical-experiment",
+  "seed": null,
+  "explanation": "Deterministic finite differences on log probabilities; no neural model or optimizer.",
+  "lengths": [
+    2,
+    8
+  ],
+  "advantages": [
+    1.0,
+    -1.0
+  ],
+  "normalization": {
+    "sequence": {
+      "loss": 0.0,
+      "first_token_dloss_dlogp": [
+        -0.2500000000349445,
+        0.06250000000873612
+      ],
+      "abs_short_to_long_gradient": 4.0
+    },
+    "token": {
+      "loss": 0.6,
+      "first_token_dloss_dlogp": [
+        -0.10000000000287557,
+        0.10000000000287557
+      ],
+      "abs_short_to_long_gradient": 1.0
+    },
+    "fixed": {
+      "loss": 0.375,
+      "first_token_dloss_dlogp": [
+        -0.06250000000873612,
+        0.06250000000873612
+      ],
+      "abs_short_to_long_gradient": 1.0
+    }
+  },
+  "reward_examples": {
+    "[0, 1, 0, 1]": {
+      "grpo": [
+        -0.9999999800000003,
+        0.9999999800000003,
+        -0.9999999800000003,
+        0.9999999800000003
+      ],
+      "centered": [
+        -0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "rloo": [
+        -0.6666666666666666,
+        0.6666666666666666,
+        -0.6666666666666666,
+        0.6666666666666666
+      ]
+    },
+    "[1, 1, 1, 1]": {
+      "grpo": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "centered": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rloo": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "[0, 0, 0, 0]": {
+      "grpo": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "centered": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rloo": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+}

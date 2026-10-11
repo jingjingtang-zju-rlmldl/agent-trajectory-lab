@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Trajectory Lab — Audit</title><style>
+body{margin:0;background:#f5f3ee;color:#172c35;font:16px/1.65 system-ui,sans-serif}main{max-width:1150px;margin:48px auto;padding:0 24px}h1{font-size:42px;line-height:1.1;margin:12px 0}h2{margin-top:36px}small,.muted{color:#52666a}.eyebrow{letter-spacing:.15em;text-transform:uppercase;color:#227365;font-weight:700}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:28px 0}.card{background:white;border:1px solid #dbe1dd;border-radius:12px;padding:20px}.card strong{display:block;font-size:36px}.card span{color:#52666a}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid #d4ddd8;padding:12px 10px;text-align:left;vertical-align:top}th{background:#e7ede8}.scroll{overflow:auto}.error{color:#ad3529}.warning{color:#865e12}code{font-size:13px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#e7ede8;padding:20px;border-radius:10px}footer{margin:40px 0;color:#52666a}@media(max-width:650px){.cards{grid-template-columns:repeat(2,1fr)}h1{font-size:32px}}</style>
+<main><div class="eyebrow">Agent RL · Inspect before training</div><h1>Trajectory audit</h1>
+<p class="muted">Mask alignment, group integrity, split overlap and evaluation accounting.</p>
+<p><strong>Read the source column:</strong> synthetic fixtures demonstrate checks, not model performance.</p>
+<div class="cards"><div class="card"><strong>16</strong><span>Trajectories</span></div><div class="card"><strong>4</strong><span>Rollout groups</span></div><div class="card"><strong>0</strong><span>Errors</span></div><div class="card"><strong>2</strong><span>Warnings</span></div></div><h2>Findings</h2><div class="scroll"><table><tr><th>Severity</th><th>Check</th><th>Item</th><th>Explanation</th></tr><tr><td class="warning">warning</td><td><code>zero_variance_group</code></td><td>fixture-v1/group-1</td><td>Relative reward signal is zero; KL/entropy terms may still update.</td></tr><tr><td class="warning">warning</td><td><code>zero_variance_group</code></td><td>fixture-v1/group-2</td><td>Relative reward signal is zero; KL/entropy terms may still update.</td></tr></table></div>
+<h2>Evaluation strata</h2><p>Each policy / run / split / source is evaluated separately. Null means unavailable.</p><div class="scroll"><table><tr><th>Run</th><th>Policy</th><th>Split</th><th>Source</th><th>Tasks</th><th>k</th><th>pass@k</th></tr><tr><td>fixture-v1</td><td>synthetic-policy</td><td>train</td><td>synthetic</td><td>4</td><td>1</td><td>0.4375</td></tr></table></div>
+<h2>Interpretation limits</h2><ul><li>Synthetic fixtures are not evidence of LLM capability.</li><li>pass@k assumes exchangeable trials; source IDs cannot prove independence or prevent semantic data leakage.</li><li>Bootstrap resamples tasks; no training-seed or repeated-query uncertainty is estimated.</li><li>Metrics describe input even when other audit errors exist; resolve errors before reporting results.</li></ul><details><summary>Complete report and provenance</summary><pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;trajectories&quot;: 16,
+  &quot;groups&quot;: 4,
+  &quot;seed&quot;: 7,
+  &quot;errors&quot;: 0,
+  &quot;warnings&quot;: 2,
+  &quot;findings&quot;: [
+    {
+      &quot;severity&quot;: &quot;warning&quot;,
+      &quot;code&quot;: &quot;zero_variance_group&quot;,
+      &quot;item&quot;: &quot;fixture-v1/group-1&quot;,
+      &quot;detail&quot;: &quot;Relative reward signal is zero; KL/entropy terms may still update.&quot;
+    },
+    {
+      &quot;severity&quot;: &quot;warning&quot;,
+      &quot;code&quot;: &quot;zero_variance_group&quot;,
+      &quot;item&quot;: &quot;fixture-v1/group-2&quot;,
+      &quot;detail&quot;: &quot;Relative reward signal is zero; KL/entropy terms may still update.&quot;
+    }
+  ],
+  &quot;group_statistics&quot;: [
+    {
+      &quot;group&quot;: &quot;fixture-v1/group-0&quot;,
+      &quot;n&quot;: 4,
+      &quot;mean_reward&quot;: 0.5,
+      &quot;flat&quot;: false,
+      &quot;advantages&quot;: [
+        -0.9999999800000003,
+        0.9999999800000003,
+        -0.9999999800000003,
+        0.9999999800000003
+      ]
+    },
+    {
+      &quot;group&quot;: &quot;fixture-v1/group-1&quot;,
+      &quot;n&quot;: 4,
+      &quot;mean_reward&quot;: 1.0,
+      &quot;flat&quot;: true,
+      &quot;advantages&quot;: [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      &quot;group&quot;: &quot;fixture-v1/group-2&quot;,
+      &quot;n&quot;: 4,
+      &quot;mean_reward&quot;: 0.0,
+      &quot;flat&quot;: true,
+      &quot;advantages&quot;: [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      &quot;group&quot;: &quot;fixture-v1/group-3&quot;,
+      &quot;n&quot;: 4,
+      &quot;mean_reward&quot;: 0.25,
+      &quot;flat&quot;: false,
+      &quot;advantages&quot;: [
+        -0.5773502558562927,
+        -0.5773502558562927,
+        1.7320507675688783,
+        -0.5773502558562927
+      ]
+    }
+  ],
+  &quot;evaluations&quot;: [
+    {
+      &quot;run_id&quot;: &quot;fixture-v1&quot;,
+      &quot;policy_version&quot;: &quot;synthetic-policy&quot;,
+      &quot;split&quot;: &quot;train&quot;,
+      &quot;source&quot;: &quot;synthetic&quot;,
+      &quot;tasks&quot;: 4,
+      &quot;trials&quot;: 16,
+      &quot;k&quot;: 1,
+      &quot;pass_at_k&quot;: 0.4375,
+      &quot;task_bootstrap_95&quot;: [
+        0.125,
+        0.8125
+      ],
+      &quot;insufficient_tasks&quot;: [],
+      &quot;duplicate_ids&quot;: false
+    }
+  ],
+  &quot;caveats&quot;: [
+    &quot;Synthetic fixtures are not evidence of LLM capability.&quot;,
+    &quot;pass@k assumes exchangeable trials; source IDs cannot prove independence or prevent semantic data leakage.&quot;,
+    &quot;Bootstrap resamples tasks; no training-seed or repeated-query uncertainty is estimated.&quot;,
+    &quot;Metrics describe input even when other audit errors exist; resolve errors before reporting results.&quot;
+  ],
+  &quot;input_sha256&quot;: &quot;3acfd66a1b60634b70cb16dba594d242243e7988bd53c452b59b4aa3693c0d3e&quot;,
+  &quot;tool_version&quot;: &quot;0.1.0&quot;
+}</pre></details><footer>Agent Trajectory Lab · v0.1.0 · CPU only, zero runtime dependencies</footer></main></html>

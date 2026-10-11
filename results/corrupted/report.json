@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "trajectories": 17,
+  "groups": 4,
+  "seed": 7,
+  "errors": 5,
+  "warnings": 4,
+  "findings": [
+    {
+      "severity": "error",
+      "code": "non_action_loss",
+      "item": "t0-0",
+      "detail": "1 non-assistant tokens active in loss."
+    },
+    {
+      "severity": "warning",
+      "code": "truncated",
+      "item": "t0-3",
+      "detail": "Specify whether time-limit truncation is excluded or intentionally trained."
+    },
+    {
+      "severity": "warning",
+      "code": "empty_loss",
+      "item": "t1-0",
+      "detail": "No active loss tokens; may be intentional filtering."
+    },
+    {
+      "severity": "error",
+      "code": "duplicate_trajectory",
+      "item": "t1-1",
+      "detail": "Duplicate ID invalidates sample counts."
+    },
+    {
+      "severity": "error",
+      "code": "split_overlap",
+      "item": "task-0",
+      "detail": "Task ID appears in multiple splits: test, train"
+    },
+    {
+      "severity": "error",
+      "code": "mixed_group_policy_version",
+      "item": "fixture-v1/group-0",
+      "detail": "Relative advantages require a coherent rollout group."
+    },
+    {
+      "severity": "error",
+      "code": "mixed_group_split",
+      "item": "fixture-v1/group-0",
+      "detail": "Relative advantages require a coherent rollout group."
+    },
+    {
+      "severity": "warning",
+      "code": "zero_variance_group",
+      "item": "fixture-v1/group-1",
+      "detail": "Relative reward signal is zero; KL/entropy terms may still update."
+    },
+    {
+      "severity": "warning",
+      "code": "zero_variance_group",
+      "item": "fixture-v1/group-2",
+      "detail": "Relative reward signal is zero; KL/entropy terms may still update."
+    }
+  ],
+  "group_statistics": [
+    {
+      "group": "fixture-v1/group-0",
+      "n": 4,
+      "mean_reward": 0.5,
+      "flat": false,
+      "advantages": null
+    },
+    {
+      "group": "fixture-v1/group-1",
+      "n": 5,
+      "mean_reward": 1.0,
+      "flat": true,
+      "advantages": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "group": "fixture-v1/group-2",
+      "n": 4,
+      "mean_reward": 0.0,
+      "flat": true,
+      "advantages": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "group": "fixture-v1/group-3",
+      "n": 4,
+      "mean_reward": 0.25,
+      "flat": false,
+      "advantages": [
+        -0.5773502558562927,
+        -0.5773502558562927,
+        1.7320507675688783,
+        -0.5773502558562927
+      ]
+    }
+  ],
+  "evaluations": [
+    {
+      "run_id": "fixture-v1",
+      "policy_version": "different-policy",
+      "split": "train",
+      "source": "synthetic",
+      "tasks": 1,
+      "trials": 1,
+      "k": 1,
+      "pass_at_k": 1.0,
+      "task_bootstrap_95": null,
+      "insufficient_tasks": [],
+      "duplicate_ids": false
+    },
+    {
+      "run_id": "fixture-v1",
+      "policy_version": "synthetic-policy",
+      "split": "test",
+      "source": "synthetic",
+      "tasks": 1,
+      "trials": 1,
+      "k": 1,
+      "pass_at_k": 0.0,
+      "task_bootstrap_95": null,
+      "insufficient_tasks": [],
+      "duplicate_ids": false
+    },
+    {
+      "run_id": "fixture-v1",
+      "policy_version": "synthetic-policy",
+      "split": "train",
+      "source": "synthetic",
+      "tasks": 4,
+      "trials": 15,
+      "k": 1,
+      "pass_at_k": null,
+      "task_bootstrap_95": null,
+      "insufficient_tasks": [],
+      "duplicate_ids": true
+    }
+  ],
+  "caveats": [
+    "Synthetic fixtures are not evidence of LLM capability.",
+    "pass@k assumes exchangeable trials; source IDs cannot prove independence or prevent semantic data leakage.",
+    "Bootstrap resamples tasks; no training-seed or repeated-query uncertainty is estimated.",
+    "Metrics describe input even when other audit errors exist; resolve errors before reporting results."
+  ],
+  "input_sha256": "dae9b28ee519a4123a54acf94ff2efb0e2d0ceb8f1e5ed76b19ab073bcc8ad5d",
+  "tool_version": "0.1.0"
+}
